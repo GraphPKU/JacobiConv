@@ -75,7 +75,9 @@ No-PCD
 python RealWorld.py --test --repeat 10 --dataset $dataset --split dense --fixalpha
 ```
 NL-RES 
-
+```
+python RealWorld.py --test --repeat 10 --dataset $dataset --split dense --resmultilayer
+```
 NL
 ```
 python RealWorld.py --test --repeat 10 --dataset $dataset --split dense --multilayer

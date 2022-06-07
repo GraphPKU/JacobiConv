@@ -22,14 +22,16 @@ def buildModel(conv_layer: int = 10,
                dpb: float = 0.0,
                dpt: float = 0.0,
                **kwargs):
-    if not args.multilayer:
+    if args.multilayer:
         emb = models.Seq([
             models.TensorMod(baseG.x),
             nn.Dropout(p=dpb),
-            nn.Linear(baseG.x.shape[1], output_channels),
+            nn.Sequential(nn.Linear(baseG.x.shape[1], output_channels),
+                          nn.ReLU(inplace=True),
+                          nn.Linear(output_channels, output_channels)),
             nn.Dropout(dpt, inplace=True)
         ])
-    else:
+    elif args.resmultilayer:
         emb = models.Seq([
             models.TensorMod(baseG.x),
             nn.Dropout(p=dpb),
@@ -37,6 +39,13 @@ def buildModel(conv_layer: int = 10,
             models.ResBlock(
                 nn.Sequential(nn.ReLU(inplace=True),
                               nn.Linear(output_channels, output_channels))),
+            nn.Dropout(dpt, inplace=True)
+        ])
+    else:
+        emb = models.Seq([
+            models.TensorMod(baseG.x),
+            nn.Dropout(p=dpb),
+            nn.Linear(baseG.x.shape[1], output_channels),
             nn.Dropout(dpt, inplace=True)
         ])
 

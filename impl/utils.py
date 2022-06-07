@@ -37,6 +37,7 @@ def parse_args():
     parser.add_argument('--sole', action="store_true")
     parser.add_argument('--fixalpha', action="store_true")
     parser.add_argument('--multilayer', action="store_true")
+    parser.add_argument('--resmultilayer', action="store_true")
 
     args = parser.parse_args()
     print("args = ", args)
