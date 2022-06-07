@@ -1,6 +1,7 @@
+RealWorldWork.py 
+ImgFilterWork.py
 RealWorld
 ImgFilter
-impl/__pycache__
 __pycache__
-data/
 nohup.out
+impl/__pycache__
