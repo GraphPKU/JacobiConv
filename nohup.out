@@ -1,0 +1,10 @@
+CUDA_VISIBLE_DEVICES=1 nohup python RealWorld.py --test --repeat 10 --dataset pubmed --split dense    --path RealWorld/ --name pubmed  >  RealWorld/pubmed1.jacobi 2>&1 &
+CUDA_VISIBLE_DEVICES=1 nohup python RealWorld.py --test --repeat 10 --dataset computers --split dense    --path RealWorld/ --name computers  >  RealWorld/computers1.jacobi 2>&1 &
+CUDA_VISIBLE_DEVICES=1 nohup python RealWorld.py --test --repeat 10 --dataset squirrel --split dense    --path RealWorld/ --name squirrel  >  RealWorld/squirrel1.jacobi 2>&1 &
+CUDA_VISIBLE_DEVICES=1 nohup python RealWorld.py --test --repeat 10 --dataset photo --split dense    --path RealWorld/ --name photo  >  RealWorld/photo1.jacobi 2>&1 &
+CUDA_VISIBLE_DEVICES=1 nohup python RealWorld.py --test --repeat 10 --dataset chameleon --split dense    --path RealWorld/ --name chameleon  >  RealWorld/chameleon1.jacobi 2>&1 &
+CUDA_VISIBLE_DEVICES=1 nohup python RealWorld.py --test --repeat 10 --dataset film --split dense    --path RealWorld/ --name film  >  RealWorld/film1.jacobi 2>&1 &
+CUDA_VISIBLE_DEVICES=1 nohup python RealWorld.py --test --repeat 10 --dataset cora --split dense    --path RealWorld/ --name cora  >  RealWorld/cora1.jacobi 2>&1 &
+CUDA_VISIBLE_DEVICES=1 nohup python RealWorld.py --test --repeat 10 --dataset citeseer --split dense    --path RealWorld/ --name citeseer  >  RealWorld/citeseer1.jacobi 2>&1 &
+CUDA_VISIBLE_DEVICES=1 nohup python RealWorld.py --test --repeat 10 --dataset texas --split dense    --path RealWorld/ --name texas  >  RealWorld/texas1.jacobi 2>&1 &
+CUDA_VISIBLE_DEVICES=1 nohup python RealWorld.py --test --repeat 10 --dataset cornell --split dense    --path RealWorld/ --name cornell  >  RealWorld/cornell1.jacobi 2>&1 &
