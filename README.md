@@ -1,16 +1,15 @@
 # How Powerful are Spectral Graph Neural Networks
 
-This repository is the official implementation of the model in the [following paper](https://openreview.net/forum?id=XLxhEjKNbXj):
+This repository is the official implementation of the model in the [following paper](https://arxiv.org/abs/2205.11172v1):
 
-Xiyuan Wang, Muhan Zhang: How Powerful are Spectral Graph Neural Networks. CoRR abs/2205.11172 (2022)
+Xiyuan Wang, Muhan Zhang: How Powerful are Spectral Graph Neural Networks. ICML 2022
 
 ```{bibtex}
 @article{JacobiConv,
   author    = {Xiyuan Wang and
                Muhan Zhang},
   title     = {How Powerful are Spectral Graph Neural Networks},
-  journal   = {CoRR},
-  volume    = {abs/2205.11172},
+  journal   = {ICML},
   year      = {2022}
 }
 ```

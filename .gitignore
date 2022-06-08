@@ -9,3 +9,4 @@ _data
 eigenvalues.npy
 eigenvectors.npy
 data/2Dgrid/processed
+data/*.pt
