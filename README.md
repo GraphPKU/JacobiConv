@@ -29,7 +29,7 @@ python ImgFilter.py --test --repeat 1 --dataset $dataset
 ```
 where $dataset is selected from low, high, rejection, band, and comb. 
 
-To reproduce results of linear GNN with other bases.
+To reproduce results of linear GNN with other bases:
 ```
 python ImgFilter.py --test --$basis --repeat 1 --dataset $dataset
 ```
@@ -50,13 +50,13 @@ python RealWorld.py --test --repeat 10 --dataset $dataset --split dense
 ```
 where $dataset is selected from pubmed, computers, squirrel, photo, chameleon, film, cora, citeseer, texas, cornell. 
 
-To reproduce results of linear GNN with other bases.
+To reproduce results of linear GNN with other bases:
 ```
 python RealWorld.py --test --$basis --repeat 10 --dataset $dataset --split dense
 ```
 where $basis is selected from cheby, power, and bern. 
 
-To reproduce other ablation studies.
+To reproduce other ablation studies:
 
 Unifilter
 ```
@@ -75,7 +75,7 @@ NL
 python RealWorld.py --test --repeat 10 --dataset $dataset --split dense --multilayer
 ```
 
-To select hyperparameters.
+To select hyperparameters:
 ```
 python RealWorld.py --repeat 3 --optruns 400 --split dense --dataset $dataset  --path $dir --name $dataset
 ```
