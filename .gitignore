@@ -6,3 +6,5 @@ __pycache__
 nohup.out
 impl/__pycache__
 _data
+eigenvalues.npy
+eigenvectors.npy
