@@ -18,7 +18,7 @@ Xiyuan Wang, Muhan Zhang: How Powerful are Spectral Graph Neural Networks. CoRR 
 #### Requirements
 Tested combination: Python 3.9.6 + [PyTorch 1.9.0](https://pytorch.org/get-started/previous-versions/) + [PyTorch_Geometric 2.0.3](https://pytorch-geometric.readthedocs.io/en/latest/notes/installation.html) + [PyTorch Sparse 0.6.12](https://github.com/rusty1s/pytorch_sparse)
 
-Other required python libraries include: numpy, scikit-learn, optuna etc.
+Other required python libraries include: numpy, scikit-learn, optuna, seaborn etc.
 
 ### Prepare Datasets
 

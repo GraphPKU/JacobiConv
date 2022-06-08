@@ -1,4 +1,4 @@
-from impl import train, metrics, PolyConv, models, GDataset, utils
+from impl import metrics, PolyConv, models, GDataset, utils
 import datasets
 import torch
 from torch.optim import Adam
@@ -109,8 +109,8 @@ def work(conv_layer: int = 10,
         val_score = 0
         early_stop = 0
         for i in range(1000):
-            train.train(optimizer, gnn, trn_dataset, loss_fn)
-            score, _ = train.test(gnn, val_dataset, score_fn, loss_fn=loss_fn)
+            utils.train(optimizer, gnn, trn_dataset, loss_fn)
+            score, _ = utils.test(gnn, val_dataset, score_fn, loss_fn=loss_fn)
             if score >= val_score:
                 early_stop = 0
                 val_score = score
@@ -187,14 +187,14 @@ def test(conv_layer=10,
         tst_score = 0
         early_stop = 0
         for i in range(1000):
-            train.train(optimizer, gnn, trn_dataset, loss_fn)
-            score, _ = train.test(gnn, val_dataset, score_fn, loss_fn=loss_fn)
+            utils.train(optimizer, gnn, trn_dataset, loss_fn)
+            score, _ = utils.test(gnn, val_dataset, score_fn, loss_fn=loss_fn)
             if score >= val_score:
                 early_stop = 0
                 val_score = score
                 if args.savemodel:
                     torch.save(gnn.state_dict(), f"{args.dataset}_{rep}.pt")
-                tst_score, _ = train.test(gnn,
+                tst_score, _ = utils.test(gnn,
                                           val_dataset,
                                           score_fn,
                                           loss_fn=loss_fn)

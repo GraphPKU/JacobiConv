@@ -108,7 +108,7 @@ def work(verbose: bool = False,
             for i in range(1000):
                 optimizer.zero_grad()
                 pred = gnn(masked_dataset.edge_index, masked_dataset.edge_attr,
-                           masked_dataset.pos)
+                           masked_dataset.mask)
                 loss = torch.square(pred - y).sum()
                 loss.backward()
                 optimizer.step()

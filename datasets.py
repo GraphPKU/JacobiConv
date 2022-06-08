@@ -40,7 +40,6 @@ class BaseGraph:
         self.x = self.x.to(device)
         self.edge_index = self.edge_index.to(device)
         self.edge_attr = self.edge_attr.to(device)
-        self.pos = self.pos.to(device)
         self.y = self.y.to(device)
         self.mask = self.mask.to(device)
         return self
@@ -92,13 +91,12 @@ def load_dataset(name: str, split_t="dense"):
         x = data.x  # torch.empty((data.x.shape[0], 0))
         ei = data.edge_index
         ea = torch.ones(ei.shape[1])
-        pos = torch.arange(0, x.shape[0], dtype=torch.int64).reshape(-1, 1)
         y = data.y
         mask = split(data, split=split_t)
-        bg = BaseGraph(x, ei, ea, pos, y, mask)
+        bg = BaseGraph(x, ei, ea, y, mask)
         bg.num_classes = data.num_classes
-        torch.save(bg, savepath)
         bg.y = bg.y.to(torch.int64)
+        torch.save(bg, savepath)
         return bg
     elif name in ['low', 'high', 'band', 'rejection', 'comb', 'low_band']:
         if os.path.exists(savepath):
@@ -106,8 +104,7 @@ def load_dataset(name: str, split_t="dense"):
             return bg
         x, y, ei, ea, mask = dataset_image.load_img(name)
         mask = mask.flatten()
-        pos = torch.arange(0, x.shape[0], dtype=torch.int64).reshape(-1, 1)
-        bg = BaseGraph(x, ei, ea, pos, y, mask)
+        bg = BaseGraph(x, ei, ea, y, mask)
         torch.save(bg, savepath)
         return bg
     else:

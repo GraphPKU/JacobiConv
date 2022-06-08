@@ -1,3 +1,5 @@
+import torch
+
 class GDataset:
     '''
     A class to put a splitted dataset.
@@ -11,17 +13,17 @@ class GDataset:
         self.edge_index = edge_index
         self.edge_attr = edge_attr
         self.y = y
-        self.pos = mask
+        self.mask = mask
 
     def __len__(self):
-        return self.pos.shape[0]
+        return torch.sum(self.mask)
 
     def __getitem__(self, idx):
-        return self.pos[idx], self.y[idx]
+        return self.mask[idx], self.y[idx]
 
     def to(self, device):
         self.edge_index = self.edge_index.to(device)
         self.edge_attr = self.edge_attr.to(device)
-        self.pos = self.pos.to(device)
+        self.mask = self.mask.to(device)
         self.y = self.y.to(device)
         return self
