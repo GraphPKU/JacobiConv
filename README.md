@@ -20,14 +20,7 @@ Tested combination: Python 3.9.6 + [PyTorch 1.9.0](https://pytorch.org/get-start
 
 Other required python libraries include: numpy, scikit-learn, optuna, seaborn etc.
 
-### Prepare Datasets
-
-We put the processed datasets in .data/. Details of processing datasets will be released soon.
-
-
 ### Reproduce Our Results
-
-Our code use gpu by default. We will add cpu option soon.
 
 #### Image Filter Tasks
 
@@ -66,7 +59,7 @@ where $basis is selected from cheby, power, and bern.
 
 To reproduce other ablation studies.
 
-unifilter
+Unifilter
 ```
 python RealWorld.py --test --repeat 10 --dataset $dataset --split dense --sole
 ```
@@ -83,7 +76,7 @@ NL
 python RealWorld.py --test --repeat 10 --dataset $dataset --split dense --multilayer
 ```
 
-We use optuna to select hyperparameters.
+To select hyperparameters.
 ```
 python RealWorld.py --repeat 3 --optruns 400 --split dense --dataset $dataset  --path $dir --name $dataset
 ```
