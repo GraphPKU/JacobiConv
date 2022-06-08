@@ -5,3 +5,5 @@ ImgFilter
 __pycache__
 nohup.out
 impl/__pycache__
+data
+_data
