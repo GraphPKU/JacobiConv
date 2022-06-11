@@ -6,7 +6,7 @@ import os.path as osp
 import os
 import torch_geometric.transforms as T
 from torch_geometric.data import InMemoryDataset, download_url, Data
-from torch_geometric.datasets import Planetoid, Amazon
+from torch_geometric.datasets import Planetoid, Amazon, WikipediaNetwork, Actor
 from torch_sparse import coalesce
 from torch_geometric.utils.undirected import to_undirected
 
@@ -87,7 +87,7 @@ class dataset_heterophily(InMemoryDataset):
                                                   pre_transform)
 
         self.data, self.slices = torch.load(self.processed_paths[0])
-        self.train_percent = self.data.train_percent.item()
+        self.train_percent = self.data.train_percent
 
     @property
     def raw_dir(self):
@@ -219,3 +219,4 @@ def DataLoader(name):
         raise ValueError(f'dataset {name} not supported in dataloader')
 
     return dataset
+    

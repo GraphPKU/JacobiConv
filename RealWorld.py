@@ -133,7 +133,7 @@ def search_hyper_params(trial: optuna.Trial):
     wd3 = trial.suggest_categorical("wd3", [0.0, 5e-5, 1e-4, 5e-4, 1e-3])
     alpha = trial.suggest_float('alpha', 0.5, 2.0, step=0.5)
     a = trial.suggest_float('a', -1.0, 2.0, step=0.25)
-    b = trial.suggest_float('b', -0.5, 0.5, step=0.25)
+    b = trial.suggest_float('b', -0.5, 2.0, step=0.25)
     dpb = trial.suggest_float("dpb", 0.0, 0.9, step=0.1)
     dpt = trial.suggest_float("dpt", 0.0, 0.9, step=0.1)
     return work(conv_layer,
@@ -195,7 +195,7 @@ def test(conv_layer=10,
                 if args.savemodel:
                     torch.save(gnn.state_dict(), f"{args.dataset}_{rep}.pt")
                 tst_score, _ = utils.test(gnn,
-                                          val_dataset,
+                                          tst_dataset,
                                           score_fn,
                                           loss_fn=loss_fn)
             else:
@@ -205,7 +205,6 @@ def test(conv_layer=10,
         vals.append(val_score)
         outs.append(tst_score)
     outs = np.array(outs)
-    print(f"val {np.average(vals)}")
     print(
         f"avg {np.average(outs):.4f} error {np.max(np.abs(sns.utils.ci(sns.algorithms.bootstrap(outs,func=np.mean,n_boot=1000),95)-outs.mean())):.4f}"
     )

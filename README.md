@@ -52,7 +52,7 @@ where $dataset is selected from pubmed, computers, squirrel, photo, chameleon, f
 
 To reproduce results of linear GNN with other bases:
 ```
-python RealWorld.py --test --$basis --repeat 10 --dataset $dataset --split dense
+python RealWorld.py --test --$basis  --fixalpha --repeat 10 --dataset $dataset --split dense
 ```
 where $basis is selected from cheby, power, and bern. 
 
