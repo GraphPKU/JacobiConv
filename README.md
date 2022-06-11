@@ -25,13 +25,13 @@ Other required python libraries include: numpy, scikit-learn, optuna, seaborn et
 
 To reproduce results of JacobiConv on image datasets:
 ```
-python ImgFilter.py --test --repeat 1 --dataset $dataset
+python ImgFilter.py --test --repeat 1 --dataset $dataset --fixalpha
 ```
 where $dataset is selected from low, high, rejection, band, and comb. 
 
 To reproduce results of linear GNN with other bases:
 ```
-python ImgFilter.py --test --$basis --repeat 1 --dataset $dataset
+python ImgFilter.py --test --$basis --repeat 1 --dataset $dataset --fixalpha
 ```
 where $basis is selected from cheby, power, and bern. 
 

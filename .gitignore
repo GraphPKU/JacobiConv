@@ -16,3 +16,4 @@ work.py
 test.ipynb
 tune
 *.db
+*.npy

@@ -33,7 +33,8 @@ def buildAdj(edge_index: Tensor, edge_weight: Tensor, n_node: int, aggr: str):
     ret = SparseTensor(row=edge_index[0],
                        col=edge_index[1],
                        value=val,
-                       sparse_sizes=(n_node, n_node)).coalesce().to_device(edge_index.device)
+                       sparse_sizes=(n_node, n_node)).coalesce()
+    ret = ret.cuda() if edge_index.is_cuda else ret
     return ret
 
 

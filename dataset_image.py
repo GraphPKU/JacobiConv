@@ -73,13 +73,13 @@ def visualize(y):
 
 
 def myeign(L):
-    if os.path.exists('eigenvalues.npy') and os.path.exists('eigenvectors.npy'):
-        eigenvalues = np.load('eigenvalues.npy')
-        eigenvectors = np.load('eigenvectors.npy')
+    if os.path.exists('./data/eigenvalues.npy') and os.path.exists('./data/eigenvectors.npy'):
+        eigenvalues = np.load('./data/eigenvalues.npy')
+        eigenvectors = np.load('./data/eigenvectors.npy')
     else:
         eigenvalues, eigenvectors = eigh(L)
-        np.save('eigenvalues.npy', eigenvalues)
-        np.save('eigenvectors.npy', eigenvectors)
+        np.save('./data/eigenvalues.npy', eigenvalues)
+        np.save('./data/eigenvectors.npy', eigenvectors)
     return eigenvalues, eigenvectors
 
 
