@@ -66,7 +66,7 @@ def buildModel(conv_layer: int = 10,
     else:
         if args.fixalpha:
             from bestHyperparams import fixalpha_alpha
-            alpha = fixalpha_alpha["power" if args.power else
+            alpha = fixalpha_alpha[args.dataset]["power" if args.power else
                                    ("cheby" if args.cheby else "jacobi")]
         conv = frame_fn(conv_fn,
                         depth=conv_layer,

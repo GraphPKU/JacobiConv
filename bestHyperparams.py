@@ -190,52 +190,52 @@ realworld_params = {
 
 
 fixalpha_alpha = {
-    "Cora": {
+    "cora": {
         "power": 1.0,
         "cheby": 0.5,
         "jacobi": 1.0
     },
-    "Citeseer": {
+    "citeseer": {
         "power": 0.5,
         "cheby": 0.5,
         "jacobi": 0.5
     },
-    "Pubmed": {
+    "pubmed": {
         "power": 1.0,
         "cheby": 1.0,
         "jacobi": 0.0
     },
-    "Computers": {
+    "computers": {
         "power": 2.0,
         "cheby": 1.5,
         "jacobi": 1.5
     },
-    "Photo": {
+    "photo": {
         "power": 2.0,
         "cheby": 1.0,
         "jacobi": 1.5
     },
-    "Chameleon": {
+    "chameleon": {
         "power": 2.0,
         "cheby": 2.0,
         "jacobi": 2.0
     },
-    "Film": {
+    "film": {
         "power": 0.5,
         "cheby": 1.0,
         "jacobi": 0.5
     },
-    "Squirrel": {
+    "squirrel": {
         "power": 2.0,
         "cheby": 2.0,
         "jacobi": 2.0
     },
-    "Texas": {
+    "texas": {
         "power": 0.5,
         "cheby": 0.5,
         "jacobi": 1.0
     },
-    "Cornell": {
+    "cornell": {
         "power": 0.5,
         "cheby": 0.5,
         "jacobi": 0.5
