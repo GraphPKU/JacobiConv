@@ -187,3 +187,57 @@ realworld_params = {
         'wd3': 0.0001
     }
 }
+
+
+fixalpha_alpha = {
+    "Cora": {
+        "power": 1.0,
+        "cheby": 0.5,
+        "jacobi": 1.0
+    },
+    "Citeseer": {
+        "power": 0.5,
+        "cheby": 0.5,
+        "jacobi": 0.5
+    },
+    "Pubmed": {
+        "power": 1.0,
+        "cheby": 1.0,
+        "jacobi": 0.0
+    },
+    "Computers": {
+        "power": 2.0,
+        "cheby": 1.5,
+        "jacobi": 1.5
+    },
+    "Photo": {
+        "power": 2.0,
+        "cheby": 1.0,
+        "jacobi": 1.5
+    },
+    "Chameleon": {
+        "power": 2.0,
+        "cheby": 2.0,
+        "jacobi": 2.0
+    },
+    "Film": {
+        "power": 0.5,
+        "cheby": 1.0,
+        "jacobi": 0.5
+    },
+    "Squirrel": {
+        "power": 2.0,
+        "cheby": 2.0,
+        "jacobi": 2.0
+    },
+    "Texas": {
+        "power": 0.5,
+        "cheby": 0.5,
+        "jacobi": 1.0
+    },
+    "Cornell": {
+        "power": 0.5,
+        "cheby": 0.5,
+        "jacobi": 0.5
+    },
+}

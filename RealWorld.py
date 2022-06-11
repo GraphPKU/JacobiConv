@@ -64,6 +64,10 @@ def buildModel(conv_layer: int = 10,
         conv = PolyConv.Bern_prop(conv_layer)
         comb = nn.Identity()
     else:
+        if args.fixalpha:
+            from bestHyperparams import fixalpha_alpha
+            alpha = fixalpha_alpha["power" if args.power else
+                                   ("cheby" if args.cheby else "jacobi")]
         conv = frame_fn(conv_fn,
                         depth=conv_layer,
                         aggr=aggr,
