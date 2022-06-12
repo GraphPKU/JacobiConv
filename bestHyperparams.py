@@ -203,7 +203,7 @@ fixalpha_alpha = {
     "pubmed": {
         "power": 1.0,
         "cheby": 1.0,
-        "jacobi": 0.0
+        "jacobi": 1.0
     },
     "computers": {
         "power": 2.0,
