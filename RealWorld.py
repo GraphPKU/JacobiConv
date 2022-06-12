@@ -62,7 +62,9 @@ def buildModel(conv_layer: int = 10,
 
     if args.bern:
         conv = PolyConv.Bern_prop(conv_layer)
-        comb = nn.Identity()
+        comb = models.Combination(output_channels,
+                                  conv_layer + 1,
+                                  sole=args.sole)
     else:
         if args.fixalpha:
             from bestHyperparams import fixalpha_alpha

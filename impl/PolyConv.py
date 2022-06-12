@@ -151,23 +151,13 @@ def JacobiConv(L, xs, adj, alphas, a=1.0, b=1.0, l=-1.0, r=1.0):
 
 
 class Bern_prop(MessagePassing):
-    '''
-    Bernstein polynomial filter from the `"BernNet: Learning Arbitrary Graph Spectral Filters via Bernstein Approximation" paper.
-    Copied from the official implementation.
-    '''
+    # Bernstein polynomial filter from the `"BernNet: Learning Arbitrary Graph Spectral Filters via Bernstein Approximation" paper.
+    # Copied from the official implementation.
     def __init__(self, K, bias=True, **kwargs):
         super(Bern_prop, self).__init__(aggr='add', **kwargs)
-
         self.K = K
-        self.temp = nn.Parameter(torch.Tensor(self.K + 1))
-        self.reset_parameters()
-
-    def reset_parameters(self):
-        self.temp.data.fill_(1)
 
     def forward(self, x, edge_index, edge_weight=None):
-        TEMP = F.relu(self.temp)
-
         #L=I-D^(-0.5)AD^(-0.5)
         edge_index1, norm1 = get_laplacian(edge_index,
                                            edge_weight,
@@ -186,7 +176,7 @@ class Bern_prop(MessagePassing):
             x = self.propagate(edge_index2, x=x, norm=norm2, size=None)
             tmp.append(x)
 
-        out = (comb(self.K, 0) / (2**self.K)) * TEMP[0] * tmp[self.K]
+        out = [(comb(self.K, 0) / (2**self.K)) * tmp[self.K]]
 
         for i in range(self.K):
             x = tmp[self.K - i - 1]
@@ -194,8 +184,8 @@ class Bern_prop(MessagePassing):
             for j in range(i):
                 x = self.propagate(edge_index1, x=x, norm=norm1, size=None)
 
-            out = out + (comb(self.K, i + 1) / (2**self.K)) * TEMP[i + 1] * x
-        return out
+            out.append((comb(self.K, i + 1) / (2**self.K)) * x)
+        return  torch.stack(out, dim=1)
 
     def message(self, x_j, norm):
         return norm.view(-1, 1) * x_j
@@ -203,3 +193,56 @@ class Bern_prop(MessagePassing):
     def __repr__(self):
         return '{}(K={}, temp={})'.format(self.__class__.__name__, self.K,
                                           self.temp)
+
+
+'''
+class Bern_prop(nn.Module):
+    def __init__(self, K: int, channels: int, bias=True, sole=False, **kwargs):
+        super().__init__()
+        self.K = K
+        self.A1 = None
+        self.A2 = None
+        if sole:
+            self.comb_weight = nn.Parameter(torch.ones((1, K+1, 1)))
+        else:
+            self.comb_weight = nn.Parameter(torch.ones((1, K+1, channels)))
+
+    def forward(self, x, edge_index, edge_weight=None):
+        #L=I-D^(-0.5)AD^(-0.5)
+        if self.A1 is None:
+            edge_index1, norm1 = get_laplacian(edge_index,
+                                               edge_weight,
+                                               normalization='sym',
+                                               dtype=x.dtype,
+                                               num_nodes=x.shape[0])
+            self.A1 = torch.sparse_coo_tensor(edge_index1,
+                                              norm1,
+                                              size=(x.shape[0], x.shape[0]))
+            edge_index2, norm2 = add_self_loops(edge_index1,
+                                                -norm1,
+                                                fill_value=2.,
+                                                num_nodes=x.shape[0])
+            self.A2 = torch.sparse_coo_tensor(edge_index2,
+                                              norm2,
+                                              size=(x.shape[0], x.shape[0]))
+
+        tmp = []
+        tmp.append(x)
+        for i in range(self.K):
+            x = self.A2 @ tmp[-1]
+            tmp.append(x)
+
+        out = [(comb(self.K, 0) / (2**self.K)) * tmp[self.K]]
+
+        for i in range(self.K):
+            x = tmp[self.K - i - 1]
+            x = self.A1 @ x
+            for j in range(i):
+                x = self.A1 @ x
+            out.append((comb(self.K, i + 1) / (2**self.K)) * x)
+        xs = [x.unsqueeze(1) for x in out]
+        x = torch.cat(xs, dim=1)
+        x = x * F.relu(self.comb_weight)
+        x = torch.sum(x, dim=1)
+        return x
+'''
