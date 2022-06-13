@@ -2,6 +2,8 @@ import torch
 import torch.nn as nn
 from torch import Tensor
 from typing import Iterable
+import torch.nn.functional as F
+
 
 class Seq(nn.Module):
     ''' 
@@ -46,7 +48,6 @@ class ResBlock(nn.Module):
         return x + self.mod(x)
 
 
-
 class Combination(nn.Module):
     '''
     A mod combination the bases of polynomial filters.
@@ -67,6 +68,20 @@ class Combination(nn.Module):
         x: node features filtered by bases, of shape (number of nodes, depth, channels).
         '''
         x = x * self.comb_weight
+        x = torch.sum(x, dim=1)
+        return x
+
+
+class Combination_bern(nn.Module):
+    def __init__(self, channels, depth, sole=False):
+        super().__init__()
+        if sole:
+            self.comb_weight = nn.Parameter(torch.ones((1, depth, 1)))
+        else:
+            self.comb_weight = nn.Parameter(torch.ones((1, depth, channels)))
+
+    def forward(self, x):
+        x = x * F.relu(self.comb_weight)
         x = torch.sum(x, dim=1)
         return x
 

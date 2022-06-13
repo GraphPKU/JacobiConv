@@ -27,6 +27,10 @@ def buildModel(conv_layer, aggr, alpha, image_idx=0, **kwargs):
     else:
         from functools import partial
         conv_fn = partial(PolyConv.JacobiConv, **kwargs)
+    if args.fixalpha:
+        from bestHyperparams import image_filter_alpha
+        alpha = image_filter_alpha["power" if args.power else
+                                   ("cheby" if args.cheby else "jacobi")][args.dataset]
     conv = PolyConv.PolyConvFrame(conv_fn,
                                   depth=conv_layer,
                                   aggr=aggr,
@@ -35,6 +39,7 @@ def buildModel(conv_layer, aggr, alpha, image_idx=0, **kwargs):
     comb = models.Combination(1, conv_layer + 1, args.sole)
     if args.bern:
         conv = PolyConv.Bern_prop(conv_layer)
+        comb = models.Combination_bern(1, conv_layer + 1)
     gnn = models.Gmodel(emb, conv, comb).to(device)
     return gnn
 
@@ -76,16 +81,12 @@ def work(verbose: bool = False,
          wd2: float = 0,
          wd3: float = 0,
          **kwargs):
-    def vprint(*args, **kwargs):
-        if verbose:
-            print(*args, **kwargs)
 
     out_loss = []
     for rep in range(args.repeat):
         out_loss.append([])
         utils.set_seed(rep)
         for idx in range(50):
-            vprint("idx", idx)
             y = masked_dataset.y[:, idx].reshape(-1, 1)
             gnn = buildModel(conv_layer, aggr, alpha, idx, **kwargs)
             optimizer = Adam([{

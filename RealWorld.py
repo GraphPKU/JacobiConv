@@ -62,14 +62,14 @@ def buildModel(conv_layer: int = 10,
 
     if args.bern:
         conv = PolyConv.Bern_prop(conv_layer)
-        comb = models.Combination(output_channels,
-                                  conv_layer + 1,
-                                  sole=args.sole)
+        comb = models.Combination_bern(output_channels,
+                                       conv_layer + 1,
+                                       sole=args.sole)
     else:
         if args.fixalpha:
             from bestHyperparams import fixalpha_alpha
-            alpha = fixalpha_alpha[args.dataset]["power" if args.power else
-                                   ("cheby" if args.cheby else "jacobi")]
+            alpha = fixalpha_alpha[args.dataset]["power" if args.power else (
+                "cheby" if args.cheby else "jacobi")]
         conv = frame_fn(conv_fn,
                         depth=conv_layer,
                         aggr=aggr,
