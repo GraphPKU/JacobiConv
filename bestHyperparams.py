@@ -55,6 +55,31 @@ img_params = {
         'wd3': 0.001
     }
 }
+
+image_filter_alpha = {
+    "power": {
+        'low': 0.5,
+        'high': 0.5,
+        'band': 1.0,
+        'rejection': 1.0,
+        'comb': 1.5
+    },
+    "cheby": {
+        'low': 1.0,
+        'high': 0.5,
+        'band': 0.5,
+        'rejection': 0.5,
+        'comb': 0.5
+    },
+    "jacobi": {
+        'low': 1.0,
+        'high': 2.0,
+        'band': 2.0,
+        'rejection': 2.0,
+        'comb': 2.0
+    }
+}
+
 realworld_params = {
     'cora': {
         'a': 2.0,
@@ -187,7 +212,6 @@ realworld_params = {
         'wd3': 0.0001
     }
 }
-
 
 fixalpha_alpha = {
     "cora": {
