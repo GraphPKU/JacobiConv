@@ -39,7 +39,6 @@ def buildModel(conv_layer, aggr, alpha, image_idx=0, **kwargs):
     comb = models.Combination(1, conv_layer + 1, args.sole)
     if args.bern:
         conv = PolyConv.Bern_prop(conv_layer)
-        comb = models.Combination_bern(1, conv_layer + 1)
     gnn = models.Gmodel(emb, conv, comb).to(device)
     return gnn
 

@@ -72,19 +72,6 @@ class Combination(nn.Module):
         return x
 
 
-class Combination_bern(nn.Module):
-    def __init__(self, channels, depth, sole=False):
-        super().__init__()
-        if sole:
-            self.comb_weight = nn.Parameter(torch.ones((1, depth, 1)))
-        else:
-            self.comb_weight = nn.Parameter(torch.ones((1, depth, channels)))
-
-    def forward(self, x):
-        x = x * F.relu(self.comb_weight)
-        x = torch.sum(x, dim=1)
-        return x
-
 
 class Gmodel(nn.Module):
     '''
