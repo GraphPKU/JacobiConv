@@ -55,8 +55,7 @@ def search_hyper_params(trial):
     alpha = trial.suggest_float('alpha', 0.5, 2.0, step=0.5)
     a = trial.suggest_float('a', -1.1, -0.0, step=0.05)
     b = trial.suggest_float('b', -0.2, 3.0, step=0.05)
-    return work(False,
-                conv_layer,
+    return work(conv_layer,
                 aggr,
                 alpha,
                 lr1,
@@ -69,8 +68,7 @@ def search_hyper_params(trial):
                 b=b)
 
 
-def work(verbose: bool = False,
-         conv_layer: int = 10,
+def work(conv_layer: int = 10,
          aggr: str = "gcn",
          alpha: float = 1.0,
          lr1: float = 1e-2,
